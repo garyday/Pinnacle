@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Pinnacle Photographrs - Login</title>
+		<link rel="stylesheet" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/styles.css">
+	</head>
+	<body>
+
+		<div class="vertical-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4 well">
+						<h1 class="text-center">PPAUK</h1>
+						<form action="/api/login" method="post">
+							<div class ="form-group">
+								<label>Photographer Name</label>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<i class="glyphicon glyphicon-camera" ></i>
+									</span>
+									<input type="text" name="username" class="form-control"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Password</label>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<i class="glyphicon glyphicon-question-sign"></i>
+									</span>
+								<input type="password" name="password" class="form-control"/>
+								</div>
+							</div>	
+							<div class="form-group">
+								<input type="submit" value="Submit" class="btn btn-primary btn-block"/>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "pinnaclewebapp",
+  "version": "1.0.0",
+  "description": "Photographer Jobs App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gary Day",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "jade": "^1.11.0",
+    "jsonwebtoken": "^6.1.2",
+    "jwt-decode": "^2.0.1",
+    "momentjs": "^1.1.6",
+    "mongoose": "^4.4.14"
+  }
+}

@@ -1,0 +1,34 @@
+doctype html
+html
+head
+	link(href='../css/bootstrap.min.css' rel='stylesheet')
+body
+	div.container
+		div.row.well
+			div.col-md-10
+				p Pinnacle Photo Agency - Photographer Access
+			div.col-md-2.text-right
+				p Hello, #{user}
+		div.row
+			table.table.table-striped.table-hover
+				thead
+					tr
+						th Date
+						th Job
+						th Rate
+						th Split
+						th Accepted
+						th Accreditation
+						th Photographer
+				tbody
+						each job in jobs
+							tr
+								th #{moment(job.Date).format('DD/MM/YY')}
+								th #{job.Job}
+								th #{job.Rate}
+								th #{job.Split}
+								th #{job.Accepted}
+								th #{job.Accreditation}	
+								th #{job.Photographer}
+
+	script(src='../js/moment.js')
