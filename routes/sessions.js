@@ -22,13 +22,8 @@ router.post('/', function(req, res) {
 							constant.JWT_SECRET, {
 								expiresIn: 60 * 60
 							});
-						// SUCESSFULL LOGIN
+						// SUCESSFULL LOGIN, SEND TO JOBS PAGE
 						res.redirect('/api/jobs?token=' + sessionToken);
-						// res.json({
-						// 	user: user,
-						// 	message: 'Sucessfully Authorized',
-						// 	sessionToken: sessionToken
-						// });
 					} else {
 						res.json({
 							user: {},

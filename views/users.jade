@@ -1,0 +1,40 @@
+doctype html
+html
+head
+	link(href='../css/bootstrap.min.css' rel='stylesheet')
+	link(href='../css/styles.css' rel='stylesheet')
+body
+	div.container
+		div.row.well
+			div.col-md-6
+				p Pinnacle Photo Agency - User Administration
+			div.col-md-2.text=center
+				button.btn.btn-default(type='button' onclick="moveAU('#{token}')") Add User
+			div.col-md-2.text-right
+				p Hello, #{user}
+				p Photographers, #{photographers}
+		div.row.well
+		div.row
+			table.table.table-striped.table-hover
+				thead
+					tr
+						th Photographer
+						th Admin
+						th Active
+						th Edit
+						th Delete
+				tbody
+						each user in users
+							tr
+								th #{user.username}
+								th #{user.admin}
+								th #{user.active}
+								th 
+									button.btn.btn-default(type='submit' onclick="moveEU('#{token}', '#{user._id}')") Edit
+								th 
+									button.btn.btn-default(type='submit' onclick="sendUserDeleteRequest('#{token}', '#{user._id}')") Delete
+
+	script(src='../js/moment.js')
+	script(src='../js/QueryParams.js')
+	script(src='../js/httpRequest.js')
+

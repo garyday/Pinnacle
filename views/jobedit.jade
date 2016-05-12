@@ -1,0 +1,54 @@
+doctype html
+html
+head
+	link(href='../../css/bootstrap.min.css' rel='stylesheet')
+	link(href='../../css/styles.css' rel='stylesheet')
+body
+	div.container
+		div.row.well
+				div.col-md-8
+					p Pinnacle Photo Agency - Edit Job
+				div.col-md-2.text=center
+				div.col-md-2.text-right
+					p Hello, #{user}
+			div.row.well
+				form(action='../../api/jobs/#{id}?token=#{token}' method=('post'))
+					div.form-group.form-group-lg
+						div
+							div.col-md-2
+								label Date
+							input.input-width(type='text' name=('date') value="#{moment(job.Date).format('DD/MM/YY')}")
+							p
+						div
+							div.col-md-2
+								label Job
+							input.input-width(type='text' name=('job') value='#{job.Job}')
+							p
+						div
+							div.col-md-2
+								label Photographer
+							input.input-width(type='text' name=('photographer') value='#{job.Photographer}')
+							p
+						div
+							div.col-md-2
+								label Rate
+							input.input-width(type='text' name=('rate') value='#{job.Rate}')
+							p
+						div
+							div.col-md-2
+								label Split
+							input.input-width(type='text' name=('split') value='#{job.Split}')
+							p
+						div
+							div.col-md-2
+								label Accepted
+							input.input-width(type='text' name=('accepted') value='#{job.Accepted}')
+							p
+						div
+							div.col-md-2
+								label Accreditation
+							input.input-width(type='text' name=('accreditation') value='#{job.Accreditation}')
+						p
+						div
+							input.btn.btn-primary.btn-block(type='submit' value='submit')
+	script(src='../js/moment.js')

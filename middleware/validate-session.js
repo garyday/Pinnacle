@@ -4,7 +4,6 @@ var constant = require('../config/constant');
 
 
 module.exports = function(req, res, next) {
-	//var sessionToken = req.headers.authorization;
 	var sessionToken = req.query.token;
 	if (!req.body.user && sessionToken) {
 		jwt.verify(sessionToken, constant.JWT_SECRET, function(err, decodedID) {

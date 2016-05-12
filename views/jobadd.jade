@@ -1,0 +1,80 @@
+doctype html
+html
+head
+	link(href='../../css/stylesjq.css' rel='stylesheet' type="text/css")
+	link(href='../../css/jquery-ui.css' type="text/css" rel='stylesheet')
+	link(href='../../css/bootstrap.min.css' rel='stylesheet')
+	link(href='../../css/styles.css' rel='stylesheet' type="text/css")
+
+	script(src='../../js/moment.js')
+	script(src='../../js/jquery-1.10.2.js')
+	script(src='../../js/jquery-ui.js')
+
+	script.
+		$(function() {
+			$("#datepicker" ).datepicker({
+
+			});
+		});
+
+body
+	div.container
+		div.row.well
+				div.col-md-8
+					p Pinnacle Photo Agency - Add A New Job
+				div.col-md-2.text=center
+				div.col-md-2.text-right
+					p Hello, #{user} 
+			div.row.well
+				form(action='../../api/jobs?token=#{token}' method=('post'))
+					div.form-group.form-group-lg
+						div
+							div.col-md-2
+								label Date
+							input.input-width.datepicker(type='text' name=('date') id="datepicker" value="")
+							p
+						div
+							div.col-md-2
+								label Job
+							input.input-width(type='text' name=('job') value='')
+							p
+						div
+							div.col-md-2
+								label Photographer
+							select.input-width(type='text' name=('photographer') value='')
+								each photographer in photographers
+									option(value="#{photographer.username}") #{photographer.username}
+							p
+						div
+							div.col-md-2
+								label Rate
+							input.input-width(type='text' name=('rate') value='')
+							p
+						div
+							div.col-md-2
+								label Split
+							select.input-width(type='text' name=('split') value='')
+								option(value="No Split") No Split
+								option(value="100%") 100%
+								option(value="70/30") 70/30
+								option(value="50/50") 50/50
+							p
+						div
+							div.col-md-2
+								label Accepted
+							select.input-width(type='text' name=('accepted') value='')
+								option(value="No") No
+								option(value="Yes") Yes
+							p
+						div
+							div.col-md-2
+								label Accreditation
+							select.input-width(type='text' name=('accreditation') value='')
+								option(value="Not Yet Applied For") Not Yet Applied For
+								option(value="Applied For") Applied For
+								option(value="Accepted") Accepted
+								option(value="Rejected") Rejected
+							p
+						div
+							p
+							input.btn.btn-primary.btn-block(type='submit' value='submit')

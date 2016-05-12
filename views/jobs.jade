@@ -2,11 +2,16 @@ doctype html
 html
 head
 	link(href='../css/bootstrap.min.css' rel='stylesheet')
+	link(href='../css/styles.css' rel='stylesheet')
 body
 	div.container
 		div.row.well
-			div.col-md-10
+			div.col-md-4
 				p Pinnacle Photo Agency - Photographer Access
+			div.col-md-4.text=center
+				button.btn.btn-default(type='button' onclick="moveUA('#{token}')") User Administration
+			div.col-md-2.text=center
+				button.btn.btn-default(type='button' onclick="moveAJ('#{token}')") Add Job
 			div.col-md-2.text-right
 				p Hello, #{user}
 		div.row
@@ -20,15 +25,28 @@ body
 						th Accepted
 						th Accreditation
 						th Photographer
+						th Edit
+						th Delete
 				tbody
 						each job in jobs
 							tr
 								th #{moment(job.Date).format('DD/MM/YY')}
 								th #{job.Job}
-								th #{job.Rate}
+								th £#{job.Rate}
 								th #{job.Split}
 								th #{job.Accepted}
 								th #{job.Accreditation}	
 								th #{job.Photographer}
+								th 
+									button.btn.btn-default(type='submit' onclick="moveEJ('#{token}', '#{job._id}')") Edit
+								th 
+									button.btn.btn-default(type='submit' onclick="sendDeleteRequest('#{token}', '#{job._id}')") Delete
+
+									
+
 
 	script(src='../js/moment.js')
+	script(src='../js/QueryParams.js')
+	script(src='../js/httpRequest.js')
+
+	

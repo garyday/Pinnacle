@@ -1,0 +1,57 @@
+doctype html
+html
+head
+	link(href='../../css/stylesjq.css' rel='stylesheet' type="text/css")
+	link(href='../../css/jquery-ui.css' type="text/css" rel='stylesheet')
+	link(href='../../css/bootstrap.min.css' rel='stylesheet')
+	link(href='../../css/styles.css' rel='stylesheet' type="text/css")
+
+	script(src='../../js/moment.js')
+	script(src='../../js/jquery-1.10.2.js')
+	script(src='../../js/jquery-ui.js')
+
+	script.
+		$(function() {
+			$("#datepicker" ).datepicker({
+
+			});
+		});
+
+body
+	div.container
+		div.row.well
+				div.col-md-8
+					p Pinnacle Photo Agency - Add A New User
+				div.col-md-2.text=center
+				div.col-md-2.text-right
+					p Hello, #{user}
+			div.row.well
+				form(action='../../api/users?token=#{token}' method=('post'))
+					div.form-group.form-group-lg
+						div
+							div.col-md-2
+								label Username
+							input.input-width(type='text' name=('username') value='')
+							p
+						div
+							div.col-md-2
+								label Site Administrator
+							select.input-width(type='text' name=('administrator') value='')
+								option(value="no") No
+								option(value="yes") Yes
+							p
+						div
+							div.col-md-2
+								label Active User
+							select.input-width(type='text' name=('active') value='')
+								option(value="yes") Yes
+								option(value="no") No
+							p
+						div
+							div.col-md-2
+								label Password
+							input.input-width(type='text' name=('password') value='')
+							p
+						div
+							p
+							input.btn.btn-primary.btn-block(type='submit' value='submit')
