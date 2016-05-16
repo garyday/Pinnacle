@@ -11,22 +11,32 @@ function getQueryVariable(variable) {
 	return undefined;
 }
 
+//User Admin
 function moveUA(token) {
 	window.location.href = '../api/users?token=' + token;
 }
 
+//User Admin
+function moveJob(token) {
+	window.location.href = '../api/jobs?token=' + token;
+}
+
+//Edit Job
 function moveEJ(token, id) {
 	window.location.href = '../api/jobs/' + id + '?token=' + token;
 }
 
+//Add Job
 function moveAJ(token, id) {
 	window.location.href = '../api/jobs/add' + '?token=' + token;
 }
 
+//Add User
 function moveAU(token, id) {
 	window.location.href = '../api/users/add' + '?token=' + token;
 }
 
+//Edit User
 function moveEU(token, id) {
 	window.location.href = '../api/users/' + id + '?token=' + token;
 }

@@ -2,7 +2,7 @@ var PORT = process.env.PORT || 3000;
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var moment = require('momentjs');
+var moment = require('moment');
 
 
 app.use(express.static(__dirname + '/public'));

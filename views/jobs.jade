@@ -3,50 +3,100 @@ html
 head
 	link(href='../css/bootstrap.min.css' rel='stylesheet')
 	link(href='../css/styles.css' rel='stylesheet')
+	link(href='../../css/stylesjq.css' rel='stylesheet' type="text/css")
+	link(href='../../css/jquery-ui.css' type="text/css" rel='stylesheet')
+	script(src='../js/moment.js')
+	script(src='../js/QueryParams.js')
+	script(src='../js/httpRequest.js')
+	script(src='../js/jquery-2.2.3.min.js')
+	script(src='../../js/jquery-ui.js')
+
+	script.
+		$(function() {
+			$("#datepicker" ).datepicker({
+				dateFormat: 'dd-mm-y'
+			});
+		});
+	script.
+		$(function() {
+			$("#datepicker2" ).datepicker({
+				dateFormat: 'dd-mm-y'
+			});
+		});
+
 body
 	div.container
 		div.row.well
 			div.col-md-4
 				p Pinnacle Photo Agency - Photographer Access
 			div.col-md-4.text=center
-				button.btn.btn-default(type='button' onclick="moveUA('#{token}')") User Administration
+				if user.admin == "yes"
+					button.btn.btn-default(type='button' onclick="moveUA('#{token}')") User Administration
 			div.col-md-2.text=center
-				button.btn.btn-default(type='button' onclick="moveAJ('#{token}')") Add Job
+				if user.admin == "yes"
+					button.btn.btn-default(type='button' onclick="moveAJ('#{token}')") Add Job
 			div.col-md-2.text-right
-				p Hello, #{user}
+				p Hello, #{user.username}
+		div.row.well
+			form
+				div.col-md-4
+					p Date From:
+						input.date-range-input-width.datepicker(type="date" name="dateFrom" id="datepicker" value="#{dateRange.from}")
+				div.col-md-4
+					p Date To:
+						input.date-range-input-width.datepicker(type="date" name="dateTo" id="datepicker2" value="#{dateRange.to}")
+				div.col-md-4
+					input(type="hidden" value="#{token}" name="token")
+					button.btn.btn-default(type="submit") Apply New Dates
 		div.row
-			table.table.table-striped.table-hover
+			table.table.table-striped.table-hover(id='cell-colour')
 				thead
 					tr
 						th Date
 						th Job
 						th Rate
-						th Split
-						th Accepted
-						th Accreditation
+						th.text-center Split
+						th.text-center Accepted
+						th.text-center Accreditation
 						th Photographer
-						th Edit
-						th Delete
+						if user.admin == "yes"
+							th.text-center Edit
+							th.text-center Delete
 				tbody
 						each job in jobs
 							tr
-								th #{moment(job.Date).format('DD/MM/YY')}
-								th #{job.Job}
-								th £#{job.Rate}
-								th #{job.Split}
-								th #{job.Accepted}
-								th #{job.Accreditation}	
-								th #{job.Photographer}
-								th 
-									button.btn.btn-default(type='submit' onclick="moveEJ('#{token}', '#{job._id}')") Edit
-								th 
-									button.btn.btn-default(type='submit' onclick="sendDeleteRequest('#{token}', '#{job._id}')") Delete
-
-									
-
-
-	script(src='../js/moment.js')
-	script(src='../js/QueryParams.js')
-	script(src='../js/httpRequest.js')
-
+								td #{moment(job.Date).format('DD/MM/YY')}
+								td #{job.Job}
+								td £#{job.Rate}
+								td.text-center #{job.Split}
+								td.accepted.text-center #{job.Accepted}
+								td.accreditation.text-center #{job.Accreditation}	
+								td #{job.Photographer}
+								if user.admin == "yes"
+									td.text-center 
+										button.btn.btn-default(type='submit' onclick="moveEJ('#{token}', '#{job._id}')") Edit
+									td.text-center 
+										button.btn.btn-default(type='submit' onclick="sendDeleteRequest('#{token}', '#{job._id}')") Delete
+	script(type='text/javascript').
+		$.extend(
+		$.expr[':'], {
+			regex: function(a, i, m, r) {
+			// Can delete 'i' to make it case-sensitive.
+			var r = new RegExp(m[3], 'i');
+			return r.test($(a).text());
+			}
+		});
+		$(document).ready(function() {
+			// Matches cells with only an 'N'
+			// See above for case-sensitivity
+			$('#cell-colour td.accepted:regex("No")').each(function() {
+				$(this).css('background-color', '#c0392b');
+			});
+			$('#cell-colour td.accreditation:regex("Accepted")').each(function() {
+				$(this).css('background-color', '#27ae60');
+			});
+			$('#cell-colour td.accreditation:regex("^Applied For")').each(function() {
+				$(this).css('background-color', ' #5499c7');
+			});
+		});
 	
