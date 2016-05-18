@@ -10,5 +10,9 @@
 }
 
 .date-range-input-width {
-	width: 200px;
+	width: 90px;
+}
+
+.head-buttons {
+	width: 150px;
 }

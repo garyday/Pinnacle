@@ -23,6 +23,7 @@ app.use(require('./middleware/validate-session'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/login', require('./routes/sessions'));
 app.use('/api/jobs', require('./routes/jobs'));
+app.use('/api/reports', require('./routes/reports'))
 
 if (app.get('env') === 'development') {
   app.locals.pretty = true;

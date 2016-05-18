@@ -8,7 +8,6 @@ var User = require('../models/user');
 router.get('/', function(req, res) {
 	if (req.user !== undefined) {
 		// Add in From and To Date for Search
-		console.log(req.query);
 		if (!req.query.dateFrom) {
 			fromDate = moment()._d
 			toDate = moment(fromDate).add(3, 'months')._d
@@ -16,9 +15,6 @@ router.get('/', function(req, res) {
 			fromDate = moment(req.query.dateFrom, 'DD-MM-YY')
 			toDate = moment(req.query.dateTo, 'DD-MM-YY')
 		}
-		console.log('From Date: ' + fromDate);
-		console.log('To Date: ' + toDate);
-		console.log('Momented From Date: ' + moment(fromDate, 'DD-MM-YY').toISOString());
 		var searchParams = {
 				Date: {
 					'$gte': fromDate,
@@ -131,6 +127,33 @@ router.post('/:id', function(req, res) {
 				//REDIRECT BACK TO JOBS PAGE WHEN SUBMIT IS HIT
 				res.redirect('/api/jobs?token=' + req.query.token);
 			});
+		});
+	} else {
+		res.status(401).send('Not Authorized');
+	}
+});
+
+//Accept a Job
+router.post('/accept/:id', function(req, res) {
+	if (req.user !== undefined) {
+		Job.findOne({
+			_id: req.params.id
+		}).then(function(Job) {
+			if (req.user.username === Job.Photographer) {
+			Job.Date = Job.Date;
+			Job.Job = Job.Job;
+			Job.Photographer = Job.Photographer;
+			Job.Rate = Job.Rate;
+			Job.Split = Job.Split;
+			Job.Accepted = 'Yes';
+			Job.Accreditation = Job.Accreditation;
+				Job.save().then(function(Job) {
+					//REDIRECT BACK TO JOBS PAGE WHEN SUBMIT IS HIT
+					res.redirect('/api/jobs?token=' + req.query.token);
+				});
+			} else {
+				res.status(401).send('Not Authorized');
+			}
 		});
 	} else {
 		res.status(401).send('Not Authorized');

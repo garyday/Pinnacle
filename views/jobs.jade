@@ -29,23 +29,25 @@ body
 		div.row.well
 			div.col-md-4
 				p Pinnacle Photo Agency - Photographer Access
-			div.col-md-4.text=center
-				if user.admin == "yes"
-					button.btn.btn-default(type='button' onclick="moveUA('#{token}')") User Administration
 			div.col-md-2.text=center
 				if user.admin == "yes"
-					button.btn.btn-default(type='button' onclick="moveAJ('#{token}')") Add Job
+					button.btn.btn-default.head-buttons(type='button' onclick="moveUA('#{token}')") User Administration
+			div.col-md-2.text=center
+					button.btn.btn-default.head-buttons(type='button' onclick="moveReports('#{token}')") Reports
+			div.col-md-2.text=center
+				if user.admin == "yes"
+					button.btn.btn-default.head-buttons(type='button' onclick="moveAJ('#{token}')") Add Job
 			div.col-md-2.text-right
 				p Hello, #{user.username}
 		div.row.well
 			form
-				div.col-md-4
+				div.col-md-3
 					p Date From:
 						input.date-range-input-width.datepicker(type="date" name="dateFrom" id="datepicker" value="#{dateRange.from}")
-				div.col-md-4
+				div.col-md-3
 					p Date To:
 						input.date-range-input-width.datepicker(type="date" name="dateTo" id="datepicker2" value="#{dateRange.to}")
-				div.col-md-4
+				div.col-md-2
 					input(type="hidden" value="#{token}" name="token")
 					button.btn.btn-default(type="submit") Apply New Dates
 		div.row
@@ -77,6 +79,11 @@ body
 										button.btn.btn-default(type='submit' onclick="moveEJ('#{token}', '#{job._id}')") Edit
 									td.text-center 
 										button.btn.btn-default(type='submit' onclick="sendDeleteRequest('#{token}', '#{job._id}')") Delete
+								else
+									td.text-center
+										form(action='../../api/jobs/accept/#{job._id}?token=#{token}' method=('post')) 
+											button.btn.btn-default(type='submit') Accept
+
 	script(type='text/javascript').
 		$.extend(
 		$.expr[':'], {
@@ -97,6 +104,9 @@ body
 			});
 			$('#cell-colour td.accreditation:regex("^Applied For")').each(function() {
 				$(this).css('background-color', ' #5499c7');
+			});
+			$('#cell-colour td.accreditation:regex("^Rejected")').each(function() {
+				$(this).css('background-color', ' #c0392b');
 			});
 		});
 	

@@ -40,3 +40,8 @@ function moveAU(token, id) {
 function moveEU(token, id) {
 	window.location.href = '../api/users/' + id + '?token=' + token;
 }
+
+//Reports
+function moveReports(token) {
+	window.location.href = '../api/reports?token=' + token;
+}
